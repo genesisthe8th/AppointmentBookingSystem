@@ -1,0 +1,26 @@
+<div class="container fade-in">
+  <div class="header">
+    <h1>Select a Branch</h1>
+    <p>Choose a location for your appointment.</p>
+  </div>
+
+  <div class="loading" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Loading branches...</p>
+  </div>
+
+  <div class="branch-grid" *ngIf="!isLoading">
+    <div class="branch-card glass-panel" *ngFor="let branch of branches" (click)="selectBranch(branch.id)">
+      <h3>{{ branch.name }}</h3>
+      <p class="address">{{ branch.address }}</p>
+      <div class="timezone">
+        <span class="icon">🕒</span> {{ branch.timezone }}
+      </div>
+      <button class="glass-button select-btn">Select Branch</button>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading && branches.length === 0" class="no-data glass-panel">
+    <p>No branches available at the moment.</p>
+  </div>
+</div>

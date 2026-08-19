@@ -1,0 +1,41 @@
+<div class="container fade-in">
+  <div class="header">
+    <h1>Finalize Booking</h1>
+    <p>You selected <strong>{{ slotTime | date:'medium' }}</strong>.</p>
+  </div>
+
+  <div class="alert success" *ngIf="successMessage">
+    {{ successMessage }}
+    <p class="sub-text">Redirecting you to the home page...</p>
+  </div>
+
+  <div class="alert error" *ngIf="errorMessage">
+    {{ errorMessage }}
+    <button class="glass-button" style="margin-top: 10px;" (click)="goBack()">Go Back to Slots</button>
+  </div>
+
+  <form class="glass-panel form-container" [formGroup]="bookingForm" (ngSubmit)="onSubmit()" *ngIf="!successMessage">
+    
+    <div class="form-group">
+      <label for="fullName">Full Name</label>
+      <input type="text" id="fullName" class="glass-input" formControlName="fullName" placeholder="John Doe">
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" class="glass-input" formControlName="email" placeholder="john@example.com">
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" class="glass-input" formControlName="phone" placeholder="+1 234 567 8900">
+    </div>
+
+    <div class="actions">
+      <button type="button" class="glass-button secondary" (click)="goBack()" [disabled]="isSubmitting">Cancel</button>
+      <button type="submit" class="glass-button" [disabled]="bookingForm.invalid || isSubmitting">
+        {{ isSubmitting ? 'Booking...' : 'Confirm Booking' }}
+      </button>
+    </div>
+  </form>
+</div>

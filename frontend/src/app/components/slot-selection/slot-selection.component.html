@@ -1,0 +1,26 @@
+<div class="container fade-in">
+  <div class="header">
+    <h1>Select a Time</h1>
+    <p>Pick a date and an available slot.</p>
+  </div>
+
+  <div class="date-picker-container glass-panel">
+    <label for="datePicker">Appointment Date:</label>
+    <input type="date" id="datePicker" class="glass-input" [(ngModel)]="selectedDate" (change)="onDateChange()">
+  </div>
+
+  <div class="loading" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Finding available slots...</p>
+  </div>
+
+  <div class="slot-grid" *ngIf="!isLoading && slots.length > 0">
+    <button class="slot-btn glass-button" *ngFor="let slot of slots" (click)="selectSlot(slot)">
+      {{ slot | date:'shortTime' }}
+    </button>
+  </div>
+
+  <div *ngIf="!isLoading && slots.length === 0" class="no-data glass-panel">
+    <p>No slots available on this date. Please select another day.</p>
+  </div>
+</div>
